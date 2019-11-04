@@ -1,0 +1,31 @@
+{
+  "name": "meanapp2",
+  "version": "1.0.0",
+  "description": "MEAN stack authentication app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "cloudinary": "^1.14.0",
+    "cors": "*",
+    "express": "*",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "*",
+    "mongodb": "^3.2.7",
+    "mongoose": "*",
+    "multer": "^1.4.1",
+    "passport": "*",
+    "passport-jwt": "*",
+    "request": "^2.88.0",
+    "nodemailer": "*",
+    "crypto": "^1.0.1"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
