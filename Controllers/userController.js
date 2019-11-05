@@ -16,11 +16,11 @@ function getUserById (id, callback){
 }
 
 
-function getAdminUserByEmail (email, callback){
-    const query={ $and: [ { email: email },{role:"Admin" } ]}
+// function getAdminUserByEmail (email, callback){
+//     const query={ $and: [ { email: email },{role:"Admin" } ]}
    
-    User.findOne(query, callback);
-}
+//     User.findOne(query, callback);
+// }
 
 
 

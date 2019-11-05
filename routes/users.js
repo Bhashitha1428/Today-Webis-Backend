@@ -109,7 +109,7 @@ router.post('/adminUserAuthenticate', (req, res, next)=> {
     console.log(email);
     console.log(password);
 
-    userController.getAdminUserByEmail(email, (err, user) => {
+    userController.getUserByEmail(email,role, (err, user) => {
         if(err) throw err;
         if(!user){
             return res.json({success: false, msg: 'User not found'});
