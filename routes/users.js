@@ -274,12 +274,9 @@ router.get('/contentProviders', (req, res, next) => {
     User
        .find({role:"contentProvider"})
        .exec()
-       .then(users=>{
+       .then(contentProviders=>{
          
-           res.status(200).json({
-               contentProviders:users,
-               state:true
-           })
+           res.status(200).json({contentProviders});
        })
        .catch(err=>{
            res.status(500).json({
@@ -296,12 +293,9 @@ router.get('/admins', (req, res, next) => {
     User
        .find({role:"admin"})
        .exec()
-       .then(users=>{
+       .then(admins=>{
          
-           res.status(200).json({
-               Admins:users,
-               state:true
-           })
+           res.status(200).json({admins})
        })
        .catch(err=>{
            res.status(500).json({
@@ -311,6 +305,25 @@ router.get('/admins', (req, res, next) => {
        })
    
 })
+
+////get all student users
+router.get('/student', (req, res, next) => {
+    console.log("get All admin user route") ;
+      User
+         .find({role:"student"})
+         .exec()
+         .then(students=>{
+           
+             res.status(200).json({students})
+         })
+         .catch(err=>{
+             res.status(500).json({
+                 error:err,
+                 state:false
+             })
+         })
+     
+  })
 
 
 

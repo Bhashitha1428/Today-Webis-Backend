@@ -91,7 +91,7 @@ router.get('/display/permissionDenyCourse',(req,res)=>{
   .exec()
   .then(course=>{
   
-        res.json(course)
+        res.json({course});
 
    })
    .catch(err=>{
@@ -101,6 +101,30 @@ router.get('/display/permissionDenyCourse',(req,res)=>{
 
 
 })
+
+
+//get permission null courses(For Admins)
+router.get('/display/permissionNullCourse',(req,res)=>{
+  
+  courseSchema.find({permission:null})
+  .exec()
+  .then(course=>{
+  
+        res.json({course})
+
+   })
+   .catch(err=>{
+     res.json({err})
+       console.log("Course detail retriving error:"+err);
+   })
+
+
+
+})
+
+
+
+
 
 //get particular course
 router.get('/display/:id',(req,res)=>{

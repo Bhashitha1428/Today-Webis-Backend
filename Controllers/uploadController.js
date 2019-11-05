@@ -11,7 +11,7 @@ const imageFilter = function (req, file, cb) {
     // accept image files only
     //console.log("LLLLLLLLLLL")
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif|pdf)$/i)) {
-        return cb(new Error('Only image files are allowed!'), false);
+        return cb(new Error('Only image and pdf files are allowed!'), false);
     }
     cb(null, true);
 };
