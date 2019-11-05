@@ -129,6 +129,73 @@ function getUserById (id, callback){
 
     }
 
+////
+ /* Admin register*/
+ function registerAdminUser(req, res,next){
+    //console.log("AAAAAAAAAA")
+User
+.find({ email: req.body.email })
+.exec()
+.then(user => {
+    
+    if(user.length >= 1){
+        console.log('user exist');
+        return res.status(409).json({
+            state: false,
+            exist: true,
+            Message:"use exist"
+        });
+    
+    } else {
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+            if(err){
+                return res.status(500).json({     
+                });
+            }else {
+                let newUser = new User({
+                    fname: req.body.fname,
+                    lname:req.body.lname,
+                    email: req.body.email,
+                    role: req.body.role,
+                    contact:req.body.contact,
+                    password: hash,
+                })
+                 newUser.save()
+                    .then(result => {
+                        console.log("User signed up"); 
+                            res.status(201).json({
+                            state: true,
+                            exist: false,
+                            Message:"User Register Sucessful",
+                        
+                        });
+                       
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            error: err,
+                            state: false,
+                            Message: "Some Validation Errors"
+                        });
+                    });
+            }
+        });
+    }
+})
+.catch(err=>{
+   res.status(500).json({
+       state:false,
+       error:err
+   })
+
+
+})
+
+}
+
+
+
 
 
 
@@ -200,6 +267,8 @@ function resetPassword(userId, newPassword){
 
     module.exports={
         registerUser:registerUser,
+        registerAdminUser:registerAdminUser,
+
         getUserByEmail:getUserByEmail,
         getAdminUserByEmail:getAdminUserByEmail,
         comparePassword:comparePassword,

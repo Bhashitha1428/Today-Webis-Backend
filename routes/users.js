@@ -18,6 +18,8 @@ const emailController = require('../controllers/emailController');
 //Register User 
 router.post('/register', userController.registerUser);
 
+//Register Admin
+router.post('/registerAdmin',checkAuth.checkIfSuperAdmin, userController.registerAdminUser);
 
 
 

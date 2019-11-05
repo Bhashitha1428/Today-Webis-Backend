@@ -29,6 +29,10 @@ const UserSchema = mongoose.Schema({
         ref:'course'
     }],
 
+    contact:{
+        type:String
+    }
+
 });
 
 const User = module.exports = mongoose.model('user', UserSchema);

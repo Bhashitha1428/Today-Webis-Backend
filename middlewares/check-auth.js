@@ -57,7 +57,29 @@ function checkIfAdmin(req, res, next) {
             });
         }
     } catch (error) {
-        console.log("PPPPPPPPPPP")
+        //console.log("PPPPPPPPPPP")
+        res.status(401).json({
+           
+            state: false
+        })
+    }
+}
+////check user is Super Admin
+function checkIfSuperAdmin(req, res, next) {
+    try {
+        const decodeJWT = decode(req, res, next);
+     
+        //req.userData = decodeJWT;
+        if (decodeJWT.user.role === 'superAdmin'){
+          
+            next()
+        } else{
+            return res.status(200).json({
+                Message: ' Not Permissions, You are not super admin user '
+            });
+        }
+    } catch (error) {
+       // console.log("PPPPPPPPPPP")
         res.status(401).json({
            
             state: false
@@ -69,10 +91,10 @@ function checkIfAdmin(req, res, next) {
 
 
 
-
 module.exports = {
     checkIfContentProvider:checkIfContentProvider,
     checkIfAdmin:checkIfAdmin,
+    checkIfSuperAdmin:checkIfSuperAdmin
    // decode:decode
    
 };
