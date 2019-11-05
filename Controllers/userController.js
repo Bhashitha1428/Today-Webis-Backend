@@ -270,7 +270,7 @@ function resetPassword(userId, newPassword){
         registerAdminUser:registerAdminUser,
 
         getUserByEmail:getUserByEmail,
-        getAdminUserByEmail:getAdminUserByEmail,
+      //  getAdminUserByEmail:getAdminUserByEmail,
         comparePassword:comparePassword,
         getUserById:getUserById,
         checkUserIfExist:checkUserIfExist,

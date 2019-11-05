@@ -100,8 +100,8 @@ router.post('/authenticate', (req, res, next)=> {
     });
 });
 
-// Admin user Authentication(login)
 
+// Admin user Authentication(login)
 
 router.post('/adminUserAuthenticate', (req, res, next)=> {
     console.log("Admin Authenticate/Login route");
