@@ -167,7 +167,7 @@ imageSecureURL="";
         file:req.body.file,
         videoId:req.body.videoId,
       //************* */
-    
+        firstVideoId:req.body.firstVideoId
         
     });
     

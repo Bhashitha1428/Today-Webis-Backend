@@ -23,7 +23,7 @@ const courseSchema= mongoose.Schema({
 
   permission:{type:Boolean},
   
-
+   firstVideoId:{type:String},
   /////*********** */
   topics:{type:Array},
   file:{type:Array},
