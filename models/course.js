@@ -5,6 +5,8 @@ const courseSchema= mongoose.Schema({
  
   name:{ type:String},
   author:{type:String},
+  authorId:{type:String},
+
   duration:{type:String},//lessmonth,1-3month,3+month
   
   duration2:{type:String},

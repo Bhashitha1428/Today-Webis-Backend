@@ -91,7 +91,7 @@ router.get('/display/permissionDenyCourse',(req,res)=>{
   .exec()
   .then(course=>{
   
-        res.json({course});
+        res.json(course);
 
    })
    .catch(err=>{
@@ -110,7 +110,7 @@ router.get('/display/permissionNullCourse',(req,res)=>{
   .exec()
   .then(course=>{
   
-        res.json({course})
+        res.json(course)
 
    })
    .catch(err=>{

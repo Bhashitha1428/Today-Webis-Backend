@@ -276,7 +276,7 @@ router.get('/contentProviders', (req, res, next) => {
        .exec()
        .then(contentProviders=>{
          
-           res.status(200).json({contentProviders});
+           res.status(200).json(contentProviders);
        })
        .catch(err=>{
            res.status(500).json({
@@ -295,7 +295,7 @@ router.get('/admins', (req, res, next) => {
        .exec()
        .then(admins=>{
          
-           res.status(200).json({admins})
+           res.status(200).json(admins)
        })
        .catch(err=>{
            res.status(500).json({
@@ -314,7 +314,7 @@ router.get('/student', (req, res, next) => {
          .exec()
          .then(students=>{
            
-             res.status(200).json({students})
+             res.status(200).json(students)
          })
          .catch(err=>{
              res.status(500).json({
