@@ -98,6 +98,63 @@ router.post('/authenticate', (req, res, next)=> {
     });
 });
 
+// Admin user Authentication(login)
+
+
+router.post('/adminUserAuthenticate', (req, res, next)=> {
+    console.log("Admin Authenticate/Login route");
+    const email= req.body.email;
+    const password = req.body.password;
+    const role=req.body.role;
+    console.log(email);
+    console.log(password);
+
+    userController.getAdminUserByEmail(email, (err, user) => {
+        if(err) throw err;
+        if(!user){
+            return res.json({success: false, msg: 'User not found'});
+        }
+
+        userController.comparePassword(password, user.password, (err, isMatch) => {
+          if(err) throw err;
+          if(isMatch){
+              const token = jwt.sign({user: user},config.secret, {
+                  expiresIn: 604800 // 1 week 
+                
+              }
+              );
+              console.log(token);
+              
+              res.header('x-auth-token',token);
+              res.json({
+                  success: true,
+                  //token: 'JWT '+token,
+                  token: token,
+                  user: {
+                      id: user._id,
+                      name: user.fname,
+                      role: user.role,
+                      email: user.email,
+                      
+                  }
+              });
+          }else{
+              return res.json({success: false, msg: 'worng password'})
+          }
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
 //profile
 router.get('/profile',passport.authenticate('jwt',{session:false}), (req, res, next)=> {
   
@@ -548,13 +605,14 @@ router.get('/forgotPassword/:email', (req, res, next) => {
 //After verify the email this can save new password for password forgoten person
 router.get('/newPassword/:email', (req, res, next) => {
     userEmail = req.params.email;
-    //console.log(userEmail)
+    console.log(userEmail)
     User
         .find({ email: userEmail })
         .exec()
         .then(user => {  
             
             if(user){
+               // console.log(user);
                 console.log(user[0]._id)
                 const newPassword = userController.generateRandomPassword()
                 console.log(newPassword);
@@ -568,8 +626,9 @@ router.get('/newPassword/:email', (req, res, next) => {
             }
         })
         .catch(err => {
-            res.status(401).json({
-                error: err,
+            console.log("AAAAAAAAAAA")
+            res.json({
+               // error: err,
                 state: false,
                 msg:"Not a valid email"
             })

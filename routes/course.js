@@ -193,14 +193,14 @@ router.get('/highRated',(req,res)=>{
   
   
     courseSchema
-        // .find({subCatergory:subCatergoryName})
+        
           .find({
-           stars: {$gt:1 }
+           [count*stars]: {$gt:1 }
           })
           .exec()
           .then(course=>{
     
-            //res.json(course);
+           
             res.status(500).json({
               result:course,
               state:true

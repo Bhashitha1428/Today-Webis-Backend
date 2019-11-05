@@ -9,11 +9,22 @@ function getUserById (id, callback){
     User.findById(id, callback);
 }
 
- function getUserByEmail (email,role, callback){
-     const query2={ $and: [ { email: email },{role:role } ]}
+ function getUserByEmail (email, role,callback){
+    const query2={ $and: [ { email: email },{role:role } ]}
    // const query = {email: email}
     User.findOne(query2, callback);
 }
+
+
+function getAdminUserByEmail (email, callback){
+    const query={ $and: [ { email: email },{role:"Admin" } ]}
+   
+    User.findOne(query, callback);
+}
+
+
+
+
 
 
 // function getUserByEmail (email){
@@ -190,6 +201,7 @@ function resetPassword(userId, newPassword){
     module.exports={
         registerUser:registerUser,
         getUserByEmail:getUserByEmail,
+        getAdminUserByEmail:getAdminUserByEmail,
         comparePassword:comparePassword,
         getUserById:getUserById,
         checkUserIfExist:checkUserIfExist,
