@@ -707,7 +707,70 @@ courseSchema
 })
 
 
+//get particular content providers permission null course
+router.get('/contentProvider/permissionNullCourse',(req,res)=>{
+  const contentProviderId=req.body.id;
 
+  courseSchema.find({
+    $and: [ { authorId:contentProviderId} ,{permission:null } ]
+  })
+.exec()
+.then(course=>{
+  res.status(200).json(course)
+})
+.catch(err=>{
+  res.json(err);
+})
+
+
+
+
+
+})
+
+
+//get particular content providers permission null course
+router.get('/contentProvider/permissionFalseCourse',(req,res)=>{
+  const contentProviderId=req.body.id;
+
+  courseSchema.find({
+    $and: [ { authorId:contentProviderId} ,{permission:false } ]
+  })
+.exec()
+.then(course=>{
+  res.status(200).json(course)
+})
+.catch(err=>{
+  res.json(err);
+})
+
+
+
+
+
+})
+
+
+//get particular content providers permission true course
+router.get('/contentProvider/permissionTrueCourse',(req,res)=>{
+  const contentProviderId=req.body.id;
+
+  courseSchema.find({
+    $and: [ { authorId:contentProviderId} ,{permission:true } ]
+  })
+.exec()
+.then(course=>{
+  res.status(200).json(course)
+})
+.catch(err=>{
+  res.json(err);
+})
+
+
+
+
+
+})
 
 
   

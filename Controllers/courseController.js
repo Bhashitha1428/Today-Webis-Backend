@@ -167,7 +167,8 @@ imageSecureURL="";
         file:req.body.file,
         videoId:req.body.videoId,
       //************* */
-        firstVideoId:req.body.firstVideoId
+        firstVideoId:req.body.firstVideoId,
+        authorId:req.body.authorId
         
     });
     
