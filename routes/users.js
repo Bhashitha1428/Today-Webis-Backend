@@ -579,7 +579,7 @@ router.delete('/delete/:id',checkAuth.checkIfAdmin,(req,res)=>{
                               User
                                .deleteOne({_id:userId})
                                .then(du=>{
-                                   console.log("AAAAAAAAAAmmmm")
+                                 //  console.log("AAAAAAAAAAmmmm")
                                 res.status(200).json({
                                   user:user,
                                   state:true,

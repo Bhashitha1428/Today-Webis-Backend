@@ -133,11 +133,11 @@ CourseSchema
 // }
 
 function saveCourse(req,res){
-    try{
-        console.log("WWWWWWWWW")
-    cloudinary.uploader.upload(req.file.path, function(result) {
-        const imageSecureURL = result.secure_url;
-           console.log(imageSecureURL);
+    // try{
+    //     console.log("WWWWWWWWW")
+    // cloudinary.uploader.upload(req.file.path, function(result) {
+    //     const imageSecureURL = result.secure_url;
+    //        console.log(imageSecureURL);
            
            const course=new CourseSchema({
             name:req.body.name,
@@ -178,15 +178,15 @@ function saveCourse(req,res){
         })
            
            
-    })
-}
-catch(error ){
-    console.log("KKKKKKK")
-console.log("Handled error(because image not pass by user) "+error)
-imageSecureURL="";
+//     })
+// }
+// catch(error ){
+//     console.log("KKKKKKK")
+// console.log("Handled error(because image not pass by user) "+error)
+// imageSecureURL="";
 
 
-} 
+// } 
 
     // const course=new CourseSchema({
     //     name:req.body.name,

@@ -265,7 +265,50 @@ router.get('/highRated',(req,res)=>{
 
 
 //store course
-router.post('/put',  uploadController.userImageUpload.single('image'),courseController.saveCourse);
+// router.post('/put',  uploadController.userImageUpload.single('image'),courseController.saveCourse);
+
+
+//store course
+ router.post('/put', courseController.saveCourse);
+
+
+
+//upload course image for course
+router.post('/uploadCourseImage/:courseId', uploadController.userImageUpload.single('image'), (req, res, next) => {
+//  console.log("uploadUserImage")
+  const courseId = req.params.courseId;
+  courseSchema
+      .find({ _id:courseId })
+      .exec()
+      .then(course => {
+         // console.log("user found")
+          cloudinary.uploader.upload(req.file.path, function(result) {
+              imageSecureURL = result.secure_url;
+              console.log(imageSecureURL)
+              //console.log(result)
+              course[0].courseImg = imageSecureURL;
+              course[0]
+                  .save()
+                  .then(result => {
+                      res.status(200).json({
+                          state: true
+                      }) 
+                  })
+          });
+      })
+      .catch(err => {
+          res.status(401).json({
+              state: false,
+              message:"Errror"
+          })
+      })
+})
+
+
+
+
+
+
 
 
 //course file upload and return url 
