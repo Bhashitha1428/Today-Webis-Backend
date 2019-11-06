@@ -150,7 +150,7 @@ function saveCourse(req,res){
             permission:null,
     
             
-           courseImg:imageSecureURL,
+           //courseImg:imageSecureURL,
             //************** */
     
             topics:req.body.topics,

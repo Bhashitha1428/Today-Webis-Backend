@@ -45,29 +45,37 @@ const upload=multer({storage:storage,
 
 
 
-//get permission true courses
-router.get('/display',(req,res)=>{
+//Searching function
+router.get('/display/:value',(req,res)=>{
   
+
+  const value=req.params.value;
+  const value2=value.toLowerCase();
    courseSchema.find({permission:true})
    .exec()
    .then(course=>{
      // console.log(typeof(course))
        //console.log(course.name);
       // console.log(course.length);
-     const a="th"
+      let arr=[];
+    
        course.forEach(c=>{
         // console.log(c.name);
          const title=(c.name).toLowerCase();
-         if(title.indexOf(a)==-1){
-
+         //console.log(c.name)
+         if(title.indexOf(value2)>=0){
+          arr.push(c);
+          console.log(c.name)
          }
          else{
-           console.log(c.name);
+         //  console.log(c.name);
          }
        })
-
+           res.json({
+             arr:arr
+           })
          //  console.log(course);
-         res.json(course)
+       //  res.json(course)
 
     })
     .catch(err=>{
@@ -82,6 +90,25 @@ router.get('/display',(req,res)=>{
 
 
 })
+
+//get permission true  All courses
+router.get('/display',(req,res)=>{
+  
+  courseSchema.find({permission:true})
+  .exec()
+  .then(course=>{
+    res.json(course)
+      })
+
+      .catch(err=>{
+        console.log("Course detail retriving error:"+err);
+    })
+        
+
+   })
+  
+
+
 
 
 //get permission false courses(For Admins)
