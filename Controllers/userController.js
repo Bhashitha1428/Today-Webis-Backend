@@ -64,7 +64,6 @@ function getUserById (id, callback){
     )}
 
 
-    ///////////////////////////////
 
     /* user register*/
     function registerUser(req, res,next){

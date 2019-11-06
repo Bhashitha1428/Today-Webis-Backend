@@ -531,7 +531,9 @@ router.delete('/delete/:id',checkAuth.checkIfAdmin,userController.checkUserIfExi
   //delete(remove) user account by himself
 
   router.delete('/remove/:id',(req,res)=>{
+      console.log("User account remove route");
     const userId=req.params.id;
+    const password=req.body.password;
   
     User
           .findById(userId)
@@ -546,8 +548,12 @@ router.delete('/delete/:id',checkAuth.checkIfAdmin,userController.checkUserIfExi
                  })
                  }
                   else{
-                  
-                          User
+
+
+                    userController.comparePassword(password, user.password, (err, isMatch) => {
+                        if(err) throw err;
+                        if(isMatch){
+                              User
                                .deleteOne({_id:userId})
                                .then(du=>{
                                 res.status(200).json({
@@ -557,6 +563,26 @@ router.delete('/delete/:id',checkAuth.checkIfAdmin,userController.checkUserIfExi
             
                              })
                                  }) 
+                                
+                              
+                            }else{
+                                res.json({
+                                    state:false,
+                                    msg:"User password is incorrect cann't delete account"
+                                })
+                            }
+                        })
+                  
+                        //   User
+                        //        .deleteOne({_id:userId})
+                        //        .then(du=>{
+                        //         res.status(200).json({
+                        //           user:user,
+                        //           state:true,
+                        //           Message:"User was deleted"
+            
+                        //      })
+                        //          }) 
                  }
              })
              .catch(err=>{
