@@ -504,7 +504,8 @@ router.put('/update/:id', (req, res) => {
 
 
 //delete user by Id and by **** admin
-router.delete('/delete/:id',checkAuth.checkIfAdmin,userController.checkUserIfExist,(req,res)=>{
+//,userController.checkUserIfExist
+router.delete('/delete/:id',checkAuth.checkIfAdmin,(req,res)=>{
     console.log(" In user delete Route");
   const userId=req.params.id;
   
@@ -549,15 +550,16 @@ router.delete('/delete/:id',checkAuth.checkIfAdmin,userController.checkUserIfExi
 
   //delete(remove) user account by himself
 
-  router.delete('/remove/:id',(req,res)=>{
+  router.delete('/remove/:id/:pass',(req,res)=>{
       console.log("User account remove route");
     const userId=req.params.id;
-    const currentPassword=req.body.password;
+    const currentPassword=req.params.pass;
+    console.log(currentPassword);
   
     User
           .findById(userId)
           .then(user=>{
-         //   console.log(user)
+            console.log(user.password)
           
                if(!user){
                 res.status(500).json({
@@ -570,12 +572,14 @@ router.delete('/delete/:id',checkAuth.checkIfAdmin,userController.checkUserIfExi
 
    
                     bcrypt.compare(currentPassword,user.password, (err, result) => {
+                        console.log(result)
                         if(result){
                            // console.log("AAAAAAAAAA")
-                            // console.log(result)
+                            console.log(result)
                               User
                                .deleteOne({_id:userId})
                                .then(du=>{
+                                   console.log("AAAAAAAAAAmmmm")
                                 res.status(200).json({
                                   user:user,
                                   state:true,
@@ -587,6 +591,7 @@ router.delete('/delete/:id',checkAuth.checkIfAdmin,userController.checkUserIfExi
                                 }     
                                 
                                 else{
+                                    console.log("SSSSSSSS")
                                     res.json({
                                         state:false,
                                         msg:"Incorreect user password"
@@ -594,16 +599,7 @@ router.delete('/delete/:id',checkAuth.checkIfAdmin,userController.checkUserIfExi
                                 }
                     })
 
-                        //   User
-                        //        .deleteOne({_id:userId})
-                        //        .then(du=>{
-                        //         res.status(200).json({
-                        //           user:user,
-                        //           state:true,
-                        //           Message:"User was deleted"
-            
-                        //      })
-                        //          }) 
+                       
                  }
              })
              .catch(err=>{
