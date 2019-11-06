@@ -552,12 +552,12 @@ router.delete('/delete/:id',checkAuth.checkIfAdmin,userController.checkUserIfExi
   router.delete('/remove/:id',(req,res)=>{
       console.log("User account remove route");
     const userId=req.params.id;
-    const password=req.body.password;
+    const currentPassword=req.body.password;
   
     User
           .findById(userId)
           .then(user=>{
-            console.log(user)
+         //   console.log(user)
           
                if(!user){
                 res.status(500).json({
@@ -568,10 +568,11 @@ router.delete('/delete/:id',checkAuth.checkIfAdmin,userController.checkUserIfExi
                  }
                   else{
 
-
-                    userController.comparePassword(password, user.password, (err, isMatch) => {
-                        if(err) throw err;
-                        if(isMatch){
+   
+                    bcrypt.compare(currentPassword,user.password, (err, result) => {
+                        if(result){
+                           // console.log("AAAAAAAAAA")
+                            // console.log(result)
                               User
                                .deleteOne({_id:userId})
                                .then(du=>{
@@ -582,16 +583,17 @@ router.delete('/delete/:id',checkAuth.checkIfAdmin,userController.checkUserIfExi
             
                              })
                                  }) 
+
+                                }     
                                 
-                              
-                            }else{
-                                res.json({
-                                    state:false,
-                                    msg:"User password is incorrect cann't delete account"
-                                })
-                            }
-                        })
-                  
+                                else{
+                                    res.json({
+                                        state:false,
+                                        msg:"Incorreect user password"
+                                    })
+                                }
+                    })
+
                         //   User
                         //        .deleteOne({_id:userId})
                         //        .then(du=>{

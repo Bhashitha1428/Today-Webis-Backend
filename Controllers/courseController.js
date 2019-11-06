@@ -108,40 +108,79 @@ CourseSchema
 }
 
 
-function storeCourse(req,res,next){
+// function storeCourse(req,res,next){
   
-   console.log("GGGGGGGG")
-//    cloudinary.uploader.upload(req.file.path, function(result) {
-//     imageSecureURL = result.secure_url;
-// })
-     saveCourse(req,res)
-     .then(result=>{
-         console.log("Course stored sucessfully");
-         res.status(200).json({
-             course:result,
-             state:true
-         })
-     })
-     .catch(err=>{
-        res.status(500).json({
-            state:false,
-            error:err
-        })
-     })
+//    console.log("GGGGGGGG")
+// //    cloudinary.uploader.upload(req.file.path, function(result) {
+// //     imageSecureURL = result.secure_url;
+// // })
+//      saveCourse(req,res)
+//      .then(result=>{
+//          console.log("Course stored sucessfully");
+//          res.status(200).json({
+//              course:result,
+//              state:true
+//          })
+//      })
+//      .catch(err=>{
+//         res.status(500).json({
+//             state:false,
+//             error:err
+//         })
+//      })
         
 
-}
+// }
 
 function saveCourse(req,res){
     try{
         console.log("WWWWWWWWW")
     cloudinary.uploader.upload(req.file.path, function(result) {
-           imageSecureURL = result.secure_url;
+        const imageSecureURL = result.secure_url;
            console.log(imageSecureURL);
+           
+           const course=new CourseSchema({
+            name:req.body.name,
+            author:req.body.author,
+            description:req.body.description,
+            catergory:req.body.catergory,
+            subCatergory:req.body.subCatergory,
+            type:req.body.type,
+            skillLevel:req.body.skillLevel,
+            permission:null,
+    
+            
+           courseImg:imageSecureURL,
+            //************** */
+    
+            topics:req.body.topics,
+            file:req.body.file,
+            videoId:req.body.videoId,
+          //************* */
+            firstVideoId:req.body.firstVideoId,
+            authorId:req.body.authorId
+            
+        });
+        
+         course.save()
+        .then(result=>{
+            console.log("Course stored sucessfully");
+            res.status(200).json({
+                course:result,
+                state:true
+            })
+        })
+        .catch(err=>{
+           res.status(500).json({
+               state:false,
+               error:err
+           })
+        })
            
            
     })
-}catch(error ){
+}
+catch(error ){
     console.log("KKKKKKK")
 console.log("Handled error(because image not pass by user) "+error)
 imageSecureURL="";
@@ -149,30 +188,30 @@ imageSecureURL="";
 
 } 
 
-    const course=new CourseSchema({
-        name:req.body.name,
-        author:req.body.author,
-        description:req.body.description,
-        catergory:req.body.catergory,
-        subCatergory:req.body.subCatergory,
-        type:req.body.type,
-        skillLevel:req.body.skillLevel,
-        permission:null,
+    // const course=new CourseSchema({
+    //     name:req.body.name,
+    //     author:req.body.author,
+    //     description:req.body.description,
+    //     catergory:req.body.catergory,
+    //     subCatergory:req.body.subCatergory,
+    //     type:req.body.type,
+    //     skillLevel:req.body.skillLevel,
+    //     permission:null,
 
         
-        courseImg:imageSecureURL,
-        //************** */
+    //    courseImg:imageSecureURL,
+    //     //************** */
 
-        topics:req.body.topics,
-        file:req.body.file,
-        videoId:req.body.videoId,
-      //************* */
-        firstVideoId:req.body.firstVideoId,
-        authorId:req.body.authorId
+    //     topics:req.body.topics,
+    //     file:req.body.file,
+    //     videoId:req.body.videoId,
+    //   //************* */
+    //     firstVideoId:req.body.firstVideoId,
+    //     authorId:req.body.authorId
         
-    });
+    // });
     
-    return course.save();
+    // return course.save();
 
 
 }
@@ -181,6 +220,7 @@ imageSecureURL="";
 
 module.exports={
     checkUserAlreadyRegisterd:checkUserAlreadyRegisterd,
-    storeCourse:storeCourse,
-    checkUserAlreadyRate:checkUserAlreadyRate
+   // storeCourse:storeCourse,
+    checkUserAlreadyRate:checkUserAlreadyRate,
+    saveCourse:saveCourse
 }

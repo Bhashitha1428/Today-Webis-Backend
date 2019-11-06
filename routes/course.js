@@ -265,7 +265,7 @@ router.get('/highRated',(req,res)=>{
 
 
 //store course
-router.post('/put',  uploadController.userImageUpload.single('image'),courseController.storeCourse);
+router.post('/put',  uploadController.userImageUpload.single('image'),courseController.saveCourse);
 
 
 //course file upload and return url 
