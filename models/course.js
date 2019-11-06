@@ -12,7 +12,7 @@ const courseSchema= mongoose.Schema({
   duration2:{type:String},
 
   description:{type:String},
-  courseImg:{type:String},
+  //courseImg:{type:String},
   catergory:{type:String},
   subCatergory:{type:String},
 
@@ -34,7 +34,8 @@ const courseSchema= mongoose.Schema({
 //************* */
 
 courseImg:{type:String},
-  url:{type:String},
+ // url:{type:String},
+  
 
   registerUser:[{
     type:mongoose.Schema.Types.ObjectId,

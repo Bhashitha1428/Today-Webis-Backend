@@ -353,9 +353,10 @@ router.put('/update/:id', async (req, res) => {
     console.log("IN course update Route");
     const c= await courseSchema.findByIdAndUpdate(req.params.id, {
          name: req.body.name,
-         author:req.body.author ,
+         catergory:req.body.catergory,
+         subCatergory:req.body.subCatergory,
+         skillLevel:req.body.skillLevel,
          duration:req.body.duration, 
-         
          description:req.body.description
 
     
@@ -708,9 +709,9 @@ courseSchema
 
 
 //get particular content providers permission null course
-router.get('/contentProvider/permissionNullCourse',(req,res)=>{
-  const contentProviderId=req.body.id;
-
+router.get('/contentProvider/permissionNullCourse/:id',(req,res)=>{
+  const contentProviderId=req.params.id;
+   //console.log(contentProviderId)
   courseSchema.find({
     $and: [ { authorId:contentProviderId} ,{permission:null } ]
   })
@@ -730,9 +731,9 @@ router.get('/contentProvider/permissionNullCourse',(req,res)=>{
 
 
 //get particular content providers permission null course
-router.get('/contentProvider/permissionFalseCourse',(req,res)=>{
-  const contentProviderId=req.body.id;
-
+router.get('/contentProvider/permissionFalseCourse/:id',(req,res)=>{
+  const contentProviderId=req.params.id;
+   //console.log(contentProviderId);
   courseSchema.find({
     $and: [ { authorId:contentProviderId} ,{permission:false } ]
   })
@@ -752,8 +753,9 @@ router.get('/contentProvider/permissionFalseCourse',(req,res)=>{
 
 
 //get particular content providers permission true course
-router.get('/contentProvider/permissionTrueCourse',(req,res)=>{
-  const contentProviderId=req.body.id;
+router.get('/contentProvider/permissionTrueCourse/:id',(req,res)=>{
+  const contentProviderId=req.params.id;
+  //console.log(contentProviderId);
 
   courseSchema.find({
     $and: [ { authorId:contentProviderId} ,{permission:true } ]

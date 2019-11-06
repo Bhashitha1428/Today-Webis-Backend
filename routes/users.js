@@ -327,6 +327,25 @@ router.get('/student', (req, res, next) => {
      
   })
 
+  ////get all Super Admin users
+router.get('/superAdmins', (req, res, next) => {
+    console.log("get All admin user route") ;
+      User
+         .find({role:"superAdmin"})
+         .exec()
+         .then(superAdmin=>{
+           
+             res.status(200).json(superAdmin)
+         })
+         .catch(err=>{
+             res.status(500).json({
+                 error:err,
+                 state:false
+             })
+         })
+     
+  })
+
 
 
 
