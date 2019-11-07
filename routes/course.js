@@ -46,7 +46,7 @@ const upload=multer({storage:storage,
 
 
 //Searching function
-router.get('/display/:value',(req,res)=>{
+router.get('/search/:value',(req,res)=>{
   
 
   const value=req.params.value;
@@ -246,7 +246,7 @@ router.get('/highRated',(req,res)=>{
     courseSchema
         
           .find({
-           [count*stars]: {$gt:1 }
+           rate: {$gt:4.8 }
           })
           .exec()
           .then(course=>{

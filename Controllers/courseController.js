@@ -153,9 +153,9 @@ function saveCourse(req,res){
             type:req.body.type,
             skillLevel:req.body.skillLevel,
             permission:null,
-            star:3,
-            rate:3,
-            conunt:1,
+           // stars:3,
+            rate:0,
+           // count:1,
     
             
            //courseImg:imageSecureURL,
