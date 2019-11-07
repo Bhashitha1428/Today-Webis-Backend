@@ -40,18 +40,22 @@ function checkUserAlreadyRegisterd(req,res,next){
         const decodeUserID = decode(req, res, next);
         console.log(decodeUserID);
         
-         CourseSchema.find({_id:req.body.courseId,registerUser:decodeUserID})
+         CourseSchema.findOne({_id:req.body.courseId,registerUser:decodeUserID})
     .populate("registerUser")
 
          .then(user=>{
              console.log(user);
              console.log("AAAAAAA")
-             if(user.length>=1)
+             if(user)
              {
                  const a=typeof(user);
                  console.log(user.length);
                  //console.log(a);
-            return  res.send("Already User Register this Course");
+            return  res.status({
+                  state:false,
+                   msg:"Already User Register this Course"
+                
+                });
                // res.send(user)
              }
     else{
@@ -88,9 +92,10 @@ CourseSchema
     console.log(course.length)
       if(course.length!=0){
           res.send("User Already rated.. ")
+          console.log("LLLLLLLLL")
       }
       else{
-       // console.log("iiiiii")
+        console.log("iiiiii")
          
          next(); 
       }
@@ -148,6 +153,9 @@ function saveCourse(req,res){
             type:req.body.type,
             skillLevel:req.body.skillLevel,
             permission:null,
+            star:3,
+            rate:3,
+            conunt:1,
     
             
            //courseImg:imageSecureURL,

@@ -704,22 +704,23 @@ router.get('/registerUsers',(req,res)=>{
 
 //rating route
 //checkAlreadyRate function use to give only one chance to partcular user for rating
+//,courseController.checkUserAlreadyRate
 router.post('/rating',courseController.checkUserAlreadyRate,(req,res)=>{
   console.log("Course rating route");
   const courseId=req.body.courseId;
   const value=req.body.star;
   const userId=req.body.userId;
-  
+  console.log(courseId)
  
 courseSchema
            .findOne({_id:courseId})  //can use findById also instead of findOne but cannot use find method
            .then(course=>{
-            // console.log(course.name);
+             console.log(course.name);
          
             course.ratedUser.push(userId);
           
             course.save()
-           // console.log("ASASAS")
+            console.log("ASASAS")
             
              
                
@@ -751,16 +752,38 @@ courseSchema
        .exec()   
       .then(result=>{
         if(result){
-         
+             console.log(result.stars);
+             console.log(result.count)
+       const newRate=(result.stars/result.count);
+       console.log(newRate)
+             result.rate=newRate
+             result.save()
+             .then(r=>{
+               res.json(r)
+             })
+             .catch(err=>{
+               res.json({
+                 err:"Handled Error"+err
+               })
+             
+               } )
+              
 
-            res.status(200).json({
-              state:true,
-              stars:result.stars,
-              count:result.count,
-              rating:(result.stars/result.count)
 
 
-            });
+            //  result.rate=(result.stars/result.count)
+            //  result[0].save();
+
+            // res.status(200).json({
+            //   state:true,
+            //   stars:result.stars,
+            //   count:result.count,
+            //   rating:(result.stars/result.count),
+            //   result:result
+
+
+
+            // });
         }
     })
     .catch(error => {
