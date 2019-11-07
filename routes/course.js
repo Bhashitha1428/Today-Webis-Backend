@@ -221,7 +221,7 @@ console.log("CCCCCCCCC")
         .then(course=>{
   
           //res.json(course);
-          res.status(500).json({
+          res.status(200).json({
             result:course,
             state:true
           })
@@ -229,7 +229,7 @@ console.log("CCCCCCCCC")
         
         .catch(err=>{
           console.log("HHHHHHHHH");
-          res.status(200).json({
+          res.status(500).json({
             error:err,
             state:false
   
@@ -246,21 +246,18 @@ router.get('/highRated',(req,res)=>{
     courseSchema
         
           .find({
-           rate: {$gt:4.8 }
+           rate: {$gt:4.5 }
           })
           .exec()
           .then(course=>{
     
            
-            res.status(500).json({
-              result:course,
-              state:true
-            })
+            res.status(200).json(course)
           })
           
           .catch(err=>{
            // console.log("HHHHHHHHH");
-            res.status(200).json({
+            res.status(500).json({
               error:err,
               state:false
     
