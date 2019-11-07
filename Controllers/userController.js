@@ -131,7 +131,7 @@ function getUserById (id, callback){
 ////
  /* Admin register*/
  function registerAdminUser(req, res,next){
-    //console.log("AAAAAAAAAA")
+    console.log("Register admin user")
 User
 .find({ email: req.body.email })
 .exec()

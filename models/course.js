@@ -33,8 +33,8 @@ const courseSchema= mongoose.Schema({
 
 //************* */
 
-courseImg:{type:String},
- // url:{type:String},
+// courseImg:{type:String},
+ url:{type:String},
   
 
   registerUser:[{

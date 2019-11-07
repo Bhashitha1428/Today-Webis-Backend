@@ -141,6 +141,7 @@ CourseSchema
 // }
 
 function saveCourse(req,res){
+  
     // try{
     //     console.log("WWWWWWWWW")
     // cloudinary.uploader.upload(req.file.path, function(result) {

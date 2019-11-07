@@ -44,6 +44,7 @@ function checkIfContentProvider(req, res, next) {
 
 ////check user is Admin
 function checkIfAdmin(req, res, next) {
+    console.log("AAAAAAAA")
     try {
         const decodeJWT = decode(req, res, next);
      

@@ -313,7 +313,7 @@ router.post('/uploadCourseImage/:courseId', uploadController.userImageUpload.sin
               imageSecureURL = result.secure_url;
               console.log(imageSecureURL)
               //console.log(result)
-              course[0].courseImg = imageSecureURL;
+              course[0].url = imageSecureURL;
               course[0]
                   .save()
                   .then(result => {
