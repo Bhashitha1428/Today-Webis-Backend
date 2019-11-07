@@ -759,7 +759,12 @@ courseSchema
              result.rate=newRate
              result.save()
              .then(r=>{
-               res.json(r)
+               res.json({
+                 state:true,
+                 course:r,
+                 rate:r.rate,
+                 msg:"Rated success"
+               })
              })
              .catch(err=>{
                res.json({

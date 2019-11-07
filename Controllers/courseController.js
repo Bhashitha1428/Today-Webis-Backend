@@ -91,7 +91,10 @@ CourseSchema
   .then(course=>{
     console.log(course.length)
       if(course.length!=0){
-          res.send("User Already rated.. ")
+          res.json({
+              state:false,
+              msg:"User already rated"
+          })
           console.log("LLLLLLLLL")
       }
       else{
