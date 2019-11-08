@@ -503,9 +503,9 @@ router.put('/update/:id', (req, res) => {
 });
 
 
-//delete user by Id and by **** admin
+//delete user by Id and by **** admin or superAdmin
 //,userController.checkUserIfExist
-router.delete('/delete/:id',checkAuth.checkIfAdmin,(req,res)=>{
+router.delete('/delete/:id',checkAuth.checkIfAdminOrSuperAdmin,(req,res)=>{
     console.log(" In user delete Route");
   const userId=req.params.id;
   
@@ -546,6 +546,8 @@ router.delete('/delete/:id',checkAuth.checkIfAdmin,(req,res)=>{
   
   
   })
+
+  
 
 
   //delete(remove) user account by himself

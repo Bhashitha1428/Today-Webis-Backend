@@ -91,11 +91,38 @@ function checkIfSuperAdmin(req, res, next) {
 
 
 
+////check user is Admin or super admin
+function checkIfAdminOrSuperAdmin(req, res, next) {
+    console.log("AAAAAAAA")
+    try {
+        const decodeJWT = decode(req, res, next);
+     
+        //req.userData = decodeJWT;
+        if (decodeJWT.user.role === 'admin' || decodeJWT.user.role ==='superAdmin'){
+          
+            next()
+        } else{
+            return res.status(200).json({
+                Message: ' Not Permissions, You are not admin or super admin user '
+            });
+        }
+    } catch (error) {
+        //console.log("PPPPPPPPPPP")
+        res.status(401).json({
+           
+            state: false
+        })
+    }
+}
+
+
+
 
 module.exports = {
     checkIfContentProvider:checkIfContentProvider,
     checkIfAdmin:checkIfAdmin,
-    checkIfSuperAdmin:checkIfSuperAdmin
+    checkIfSuperAdmin:checkIfSuperAdmin,
+    checkIfAdminOrSuperAdmin:checkIfAdminOrSuperAdmin
    // decode:decode
    
 };
